@@ -2,14 +2,21 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+Installation:
+
+```bash
+npm i
+
+```
+
+Run the development server:
 
 ```bash
 npm run dev
 
 ```
 
-To run in production mode:
+Run in production mode:
 
 ```bash
 npm run build
