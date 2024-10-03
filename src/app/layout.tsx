@@ -3,11 +3,11 @@ import type { Metadata } from 'next'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter'
 
 import { ModalProvider } from '@/components/providers/modal-provider'
-import theme from '@/theme'
-import { ThemeProvider } from '@mui/material/styles'
+
+import './global.css'
 
 export const metadata: Metadata = {
-	title: 'Create Next App',
+	title: 'Список компаний',
 }
 
 export default function RootLayout({
@@ -20,7 +20,7 @@ export default function RootLayout({
 			<body>
 				<AppRouterCacheProvider>
 					<ModalProvider />
-					<ThemeProvider theme={theme}>{children}</ThemeProvider>
+					{children}
 				</AppRouterCacheProvider>
 			</body>
 		</html>

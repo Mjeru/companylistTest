@@ -10,6 +10,7 @@ import {
 	Typography,
 } from '@mui/material'
 
+import { Header } from '@/components/Header'
 import { useModal } from '@/hooks/use-modal-store'
 import { useStorage } from '@/hooks/use-storage'
 import { localStorageService } from '@/utils/storage'
@@ -24,15 +25,22 @@ const Companies = () => {
 	const { onOpen } = useModal()
 
 	useEffect(() => {
-		if (!companies.length) {
+		if (companies.length === 0) {
 			updateCompanies(localStorageService.getCompanies())
 		}
-	}, [updateCompanies])
+	}, [updateCompanies, companies])
 
 	const renderCompanies = () => {
 		return companies.map((company, i) => (
 			<TableRow key={company.id}>
-				<TableCell color='primary'>{i + 1}</TableCell>
+				<TableCell
+					color='primary'
+					sx={{
+						textAlign: 'center',
+					}}
+				>
+					{i + 1}
+				</TableCell>
 				<TableCell color='primary'>{company.name}</TableCell>
 				<TableCell color='primary'>{company.address}</TableCell>
 				<TableCell color='primary'>{company.email}</TableCell>
@@ -74,38 +82,56 @@ const Companies = () => {
 	}
 
 	return (
-		<div>
-			<Typography variant='h5' sx={{ mb: 2 }}>
-				Компании
-			</Typography>
-			<Table>
-				<TableHead>
-					<TableRow>
-						<TableCell></TableCell>
-						<TableCell>Название</TableCell>
-						<TableCell>Адрес</TableCell>
-						<TableCell>E-mail</TableCell>
-						<TableCell>Телефон</TableCell>
-						<TableCell>Сотрудники</TableCell>
-						<TableCell sx={{ width: '200px' }}></TableCell>
-					</TableRow>
-				</TableHead>
-				<TableBody>
-					{renderCompanies()}
-					<TableRow>
-						<TableCell colSpan={7} align='center' sx={{ border: 'none' }}>
-							<Button
-								onClick={() => onOpen('addCompany')}
-								variant='contained'
-								color='primary'
-							>
-								<AddIcon />
-							</Button>
-						</TableCell>
-					</TableRow>
-				</TableBody>
-			</Table>
-		</div>
+		<>
+			<Header>
+				<Typography variant='h1' sx={{ fontSize: '24px' }} color='white'>
+					Компании
+				</Typography>
+			</Header>
+			<Box
+				sx={{
+					padding: '20px',
+					width: '100%',
+					overflow: 'auto',
+					height: 'calc(100vh - 68px)',
+				}}
+			>
+				<Table
+					sx={{
+						background: 'white',
+						m: '0 auto',
+						borderRadius: '10px',
+						minWidth: '100%',
+					}}
+				>
+					<TableHead>
+						<TableRow>
+							<TableCell></TableCell>
+							<TableCell>Название</TableCell>
+							<TableCell>Адрес</TableCell>
+							<TableCell>E-mail</TableCell>
+							<TableCell>Телефон</TableCell>
+							<TableCell>Сотрудники</TableCell>
+							<TableCell sx={{ width: '200px' }}></TableCell>
+						</TableRow>
+					</TableHead>
+					<TableBody>
+						{renderCompanies()}
+						<TableRow>
+							<TableCell colSpan={7} align='center' sx={{ border: 'none' }}>
+								<Button
+									onClick={() => onOpen('addCompany')}
+									variant='contained'
+									color='primary'
+								>
+									<AddIcon />
+								</Button>
+							</TableCell>
+						</TableRow>
+					</TableBody>
+				</Table>
+			</Box>
+		</>
 	)
 }
 

@@ -1,4 +1,5 @@
 'use client'
+import { Header } from '@/components/Header'
 import { useModal } from '@/hooks/use-modal-store'
 import { useStorage } from '@/hooks/use-storage'
 import { localStorageService } from '@/utils/storage'
@@ -90,38 +91,59 @@ export default function Page() {
 
 	return (
 		<div>
-			<Link href='/'>
-				<MuiLink>К списку компаний</MuiLink>
-			</Link>
-			<Typography variant='h5' sx={{ mb: 2 }}>
-				Список сотрудников компании {`'${company?.name}'`}
-			</Typography>
+			<Header>
+				<Typography variant='h1' sx={{ fontSize: '24px' }} color='white'>
+					Список сотрудников компании {`'${company?.name}'`}
+				</Typography>
+			</Header>
 
-			<Table>
-				<TableHead>
-					<TableRow>
-						<TableCell></TableCell>
-						<TableCell>Имя</TableCell>
-						<TableCell>Должность</TableCell>
-						<TableCell>Отдел</TableCell>
-						<TableCell sx={{ width: '200px' }}></TableCell>
-					</TableRow>
-				</TableHead>
-				<TableBody>
-					{renderEmployees()}
-					<TableRow>
-						<TableCell colSpan={5} align='center' sx={{ border: 'none' }}>
-							<Button
-								onClick={() => onOpen('addEmployee')}
-								variant='contained'
-								color='primary'
-							>
-								<AddIcon />
-							</Button>
-						</TableCell>
-					</TableRow>
-				</TableBody>
-			</Table>
+			<Box
+				sx={{
+					padding: '20px',
+					width: '100%',
+					overflow: 'auto',
+					height: 'calc(100vh - 68px)',
+				}}
+			>
+				<Box sx={{ mb: 2 }}>
+					<Link href='/'>
+						<MuiLink>К списку компаний</MuiLink>
+					</Link>
+				</Box>
+
+				<Table
+					sx={{
+						background: 'white',
+						m: '0 auto',
+						borderRadius: '10px',
+						minWidth: '100%',
+					}}
+				>
+					<TableHead>
+						<TableRow>
+							<TableCell></TableCell>
+							<TableCell>Имя</TableCell>
+							<TableCell>Должность</TableCell>
+							<TableCell>Отдел</TableCell>
+							<TableCell sx={{ width: '200px' }}></TableCell>
+						</TableRow>
+					</TableHead>
+					<TableBody>
+						{renderEmployees()}
+						<TableRow>
+							<TableCell colSpan={5} align='center' sx={{ border: 'none' }}>
+								<Button
+									onClick={() => onOpen('addEmployee')}
+									variant='contained'
+									color='primary'
+								>
+									<AddIcon />
+								</Button>
+							</TableCell>
+						</TableRow>
+					</TableBody>
+				</Table>
+			</Box>
 		</div>
 	)
 }
